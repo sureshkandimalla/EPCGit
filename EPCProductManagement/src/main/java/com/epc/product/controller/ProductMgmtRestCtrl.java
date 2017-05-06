@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.epc.product.domain.Cart;
 import com.epc.product.domain.CartProduct;
 import com.epc.product.domain.UIProduct;
 import com.epc.product.service.ProductService;
@@ -93,9 +94,12 @@ public class ProductMgmtRestCtrl {
 	
 	@Consumes({MediaType.APPLICATION_JSON})
 	@RequestMapping(value = "/getCart/", method = RequestMethod.POST)
-	public ResponseEntity<?> getProductsForProduct(@RequestBody List<CartProduct> products) {
+	public ResponseEntity<Cart> getProductsForProduct(@RequestBody Cart cart1) {
 		System.out.println("Suresh ");
-		return null;//getProductById(id);
+		Cart cart=new Cart();
+		cart= productService.getCart(cart1);
+		cart.setZipCode(75035);
+		return new ResponseEntity<Cart>(cart, HttpStatus.OK);
 	}
 
 }

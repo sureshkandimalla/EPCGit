@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.epc.product.dao.ProductLoaderDAO;
+import com.epc.product.domain.Cart;
+import com.epc.product.domain.CartProduct;
 import com.epc.product.domain.UIProduct;
 import com.epc.product.model.Product;
 import com.epc.product.model.Product1;
@@ -92,5 +94,63 @@ public class ProductServiceImpl implements ProductService{
 	public List<UIProduct> getProductsByName(String productName) {
 		products=productLoaderDAO.loadProductsByName(productName);
 		return ConvertionUtil.productToUIproduct(products);
+	}
+
+
+	@Override
+	public Cart getCart(Cart cart) {
+		
+		List<UIProduct> uiProductList=cart.getUiProducts();
+		
+		int[] productIds =new int[100];
+		Integer  i=0;
+		//TODO:Change into adv java code
+	   /* uiProductList.forEach(product->{
+	    	productIds[i++]= product.getProductId();
+	    });*/
+	    for(UIProduct pl:uiProductList)
+		{
+			productIds[i++]= pl.getProductId();
+		}
+		
+		List<Product> productsList = new ArrayList<Product>();
+		
+		productsList=productLoaderDAO.getProductsByIds(productIds);
+		List<UIProduct> uiProductsList1=ConvertionUtil.productToUIproduct(productsList);
+		cart.setUiProducts(uiProductsList1);
+		return cart;
+		
+		//for()
+		//List<CartProduct> cp;
+		//List<Product> productsList = new ArrayList<Product>();
+	
+		/*int[] productIds =new int[100];
+	    int i=0;
+	    int j=0;
+		for(CartProduct cp:cart)
+		{
+		   productIds[i++]= cp.getProductId().intValue();
+			//p=productLoaderDAO.getProductDetails(p);
+			
+		}
+		
+		productsList=productLoaderDAO.getProductsByIds(productIds);
+		List<UIProduct> uiProductsList=ConvertionUtil.productToUIproduct(productsList);
+		
+		for(CartProduct cp:cart)
+		{
+			Double totalPrice=cp.getTotalPrice();
+			Integer qty=cp.getQuntity();
+			if(qty>1)
+			{
+				totalPrice = new qty * (uiProductsList.get(cp.getProductId()).getProductPrice().);
+			}
+		}
+		for(CartProduct cp:cart)
+		{
+			cp.setUiProduct(uiProductsList.get(j++));
+		}
+	
+		return cart;*/
 	}
 }

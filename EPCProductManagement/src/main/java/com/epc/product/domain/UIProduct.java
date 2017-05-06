@@ -55,6 +55,8 @@ public class UIProduct implements Serializable {
 	private String productType;
 
 	private BigDecimal productWeight;
+	
+	private int quantity;
 
 	// Additinal properties for UI
 
@@ -192,6 +194,14 @@ public class UIProduct implements Serializable {
 
 	public void setProduSubctCategory(String produSubctCategory) {
 		this.produSubctCategory = produSubctCategory;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 }

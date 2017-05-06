@@ -2,20 +2,21 @@ package com.epc.product.domain;
 
 public class CartProduct {
 	private Integer productId;
-	private UIProduct product;
+	private UIProduct uiProduct;
 	private Integer quntity;
 	private Double totalPrice;
+	
 	public Integer getProductId() {
 		return productId;
 	}
 	public void setProductId(Integer productId) {
 		this.productId = productId;
 	}
-	public UIProduct getProduct() {
-		return product;
+	public UIProduct getUiProduct() {
+		return uiProduct;
 	}
-	public void setProduct(UIProduct product) {
-		this.product = product;
+	public void setUiProduct(UIProduct uiProduct) {
+		this.uiProduct = uiProduct;
 	}
 	public Integer getQuntity() {
 		return quntity;

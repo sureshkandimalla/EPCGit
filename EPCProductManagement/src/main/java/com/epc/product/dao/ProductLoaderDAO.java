@@ -60,8 +60,20 @@ public class ProductLoaderDAO {
 	public List<Product> getProductsByIds(int[] productIds) {
 		
 		List<Product> a = repo.findByProductIdIn(productIds);
+		 System.out.println("##############################");
+		 System.out.println(a.size());
 		return a;
 
+	}
+	
+	public Product getProductDetails(Product p)
+	{
+		// p=repo.findByProductId(p.getProductId());
+		 int[]a={1,2};
+		 List<Product> k=repo.findByProductIdIn(a);
+		 System.out.println("##############################");
+		 System.out.println(k.size());
+		return p;
 	}
 
 }
