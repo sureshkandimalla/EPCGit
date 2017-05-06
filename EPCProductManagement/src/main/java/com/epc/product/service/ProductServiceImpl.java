@@ -18,6 +18,8 @@ import com.epc.product.model.Product;
 import com.epc.product.model.Product1;
 import com.epc.product.util.ConvertionUtil;
 
+import jersey.repackaged.com.google.common.base.Objects;
+
 
 
 @Service("userService")
@@ -101,56 +103,18 @@ public class ProductServiceImpl implements ProductService{
 	public Cart getCart(Cart cart) {
 		
 		List<UIProduct> uiProductList=cart.getUiProducts();
+		ArrayList<Integer> productIdList=new ArrayList<Integer>(uiProductList.size());
 		
-		int[] productIds =new int[100];
-		Integer  i=0;
-		//TODO:Change into adv java code
-	   /* uiProductList.forEach(product->{
-	    	productIds[i++]= product.getProductId();
-	    });*/
-	    for(UIProduct pl:uiProductList)
-		{
-			productIds[i++]= pl.getProductId();
-		}
+		uiProductList.forEach(product->{
+	    	productIdList.add(product.getProductId());
+	    });
+	    
+		List<Product> productsList=productLoaderDAO.getProductsByIds(productIdList);
 		
-		List<Product> productsList = new ArrayList<Product>();
-		
-		productsList=productLoaderDAO.getProductsByIds(productIds);
 		List<UIProduct> uiProductsList1=ConvertionUtil.productToUIproduct(productsList);
 		cart.setUiProducts(uiProductsList1);
-		return cart;
 		
-		//for()
-		//List<CartProduct> cp;
-		//List<Product> productsList = new ArrayList<Product>();
-	
-		/*int[] productIds =new int[100];
-	    int i=0;
-	    int j=0;
-		for(CartProduct cp:cart)
-		{
-		   productIds[i++]= cp.getProductId().intValue();
-			//p=productLoaderDAO.getProductDetails(p);
-			
-		}
 		
-		productsList=productLoaderDAO.getProductsByIds(productIds);
-		List<UIProduct> uiProductsList=ConvertionUtil.productToUIproduct(productsList);
-		
-		for(CartProduct cp:cart)
-		{
-			Double totalPrice=cp.getTotalPrice();
-			Integer qty=cp.getQuntity();
-			if(qty>1)
-			{
-				totalPrice = new qty * (uiProductsList.get(cp.getProductId()).getProductPrice().);
-			}
-		}
-		for(CartProduct cp:cart)
-		{
-			cp.setUiProduct(uiProductsList.get(j++));
-		}
-	
-		return cart;*/
+		return cart;	
 	}
 }

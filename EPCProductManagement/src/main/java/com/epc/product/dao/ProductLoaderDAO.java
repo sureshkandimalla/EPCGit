@@ -66,6 +66,14 @@ public class ProductLoaderDAO {
 
 	}
 	
+public List<Product> getProductsByIds(List<Integer> productIds) {
+		
+		List<Product> a = repo.findByProductIdIn(productIds);
+		 System.out.println("##############################");
+		 System.out.println(a.size());
+		return a;
+
+	}
 	public Product getProductDetails(Product p)
 	{
 		// p=repo.findByProductId(p.getProductId());

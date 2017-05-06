@@ -13,5 +13,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	public List<Product> findByproductNameIgnoreCaseContaining(String productName);
 	public List<Product> findByproductNameIgnoreCaseStartingWith(String productName);
 	public List<Product> findByProductIdIn(int[] a);
+	public List<Product> findByProductIdIn(List<Integer> a);
+	//public List<Product> findByProductId
 	
 }
